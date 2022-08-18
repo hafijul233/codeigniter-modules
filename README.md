@@ -1,11 +1,12 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
-# This is my package codeigniter-modules
+# Codeigniter4 Modules
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hafijul233/codeigniter-modules.svg?style=flat-square)](https://packagist.org/packages/hafijul233/codeigniter-modules)
 [![Tests](https://github.com/hafijul233/codeigniter-modules/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/hafijul233/codeigniter-modules/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/hafijul233/codeigniter-modules.svg?style=flat-square)](https://packagist.org/packages/hafijul233/codeigniter-modules)
+[![](https://github.com/organization/project/workflows/PHPUnit/badge.svg)](https://github.com/organization/project/actions/workflows/phpunit.yml)
+[![](https://github.com/organization/project/workflows/PHPStan/badge.svg)](https://github.com/organization/project/actions/workflows/phpstan.yml)
+[![](https://github.com/organization/project/workflows/Deptrac/badge.svg)](https://github.com/organization/project/actions/workflows/deptrac.yml)
+[![Coverage Status](https://coveralls.io/repos/github/organization/project/badge.svg?branch=develop)](https://coveralls.io/github/organization/project?branch=develop)
 
 This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
 
