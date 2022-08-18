@@ -1,4 +1,4 @@
-name: PHPCSFixer
+name: Rector
 
 on:
   pull_request:
@@ -6,19 +6,27 @@ on:
       - develop
     paths:
       - '**.php'
-      - '.github/workflows/php-cs-fixer.yml'
+      - 'composer.*'
+      - 'rector.php'
+      - '.github/workflows/rector.yml'
   push:
     branches:
       - develop
     paths:
       - '**.php'
-      - '.github/workflows/php-cs-fixer.yml'
+      - 'composer.*'
+      - 'rector.php'
+      - '.github/workflows/rector.yml'
 
 jobs:
   build:
-    name: Coding Standards
+    name: PHP ${{ matrix.php-versions }} Rector Analysis
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4', '8.0', '8.1']
 
     steps:
       - name: Checkout
@@ -27,8 +35,9 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
-          extensions: json, tokenizer, intl
+          php-version: ${{ matrix.php-versions }}
+          tools: phpstan
+          extensions: intl, json, mbstring, xml
           coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,11 +60,7 @@ jobs:
           else
             composer update --no-progress --no-interaction --prefer-dist --optimize-autoloader
           fi
-
-      - name: Check code for standards compliance
-        run: vendor/bin/php-cs-fixer fix --verbose --ansi --dry-run --using-cache=no --diff
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Fix styling
+      - name: Analyze for refactoring
+        run: |
+          composer global require --dev rector/rector:^0.13.8
+          rector process --dry-run --no-progress-bar
